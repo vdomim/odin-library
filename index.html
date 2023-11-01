@@ -9,17 +9,54 @@
 </head>
 <body>
     <header>
-        sadfgsdfgsd
+        Cabecera
     </header>
-    <aside>
-
-    </aside>
     <main>
+        <section class="card-container">
+            <div class="card">
+                Una tarjeta
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <p>The Hobbit</p>
+                    <p>J.R.R. Tolkien</p>
+                    <p>295 pages</p>
+                    <p>leido</p>
+                </div>
+                <div class="card-actions">
+                    <button>Eliminar</button>
+                    <button>Cambiar estado</button>
+                </div>
+            </div>
+            <div class="card">
+                Una tarjeta
+            </div>
+            <div class="card">
+                Una tarjeta
+            </div>
+            <div class="card">
+                Una tarjeta
+            </div>
+        </section>
         <button id="addBook" class="addBook">+</button>
-        <dialog>
-            <button autofocus>Close</button>
-            <p>This modal dialog has a groovy backdrop!</p>
-        </dialog>
     </main>
+    <dialog>
+        <button value="cancel" formmethod="dialog" autofocus>Cancel</button>
+        <form action="">
+            <label>Titulo
+                <input type="text" name="title" id="title">
+            </label>
+            <label>Autor
+                <input type="text" name="author" id="author">
+            </label>
+            <label>Pages
+                <input type="number" name="numPages" id="numPages">
+            </label>
+            <label>Readed?
+                <input type="checkbox" name="readed" id="readed">
+            </label>
+            <button>Añadir libro</button>
+        </form>
+    </dialog>
 </body>
 </html>

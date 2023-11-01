@@ -27,7 +27,7 @@ addBookToLibrary(book1);
 
 
 addBtn.addEventListener('click', () => {
-    dialog.show()
+    dialog.showModal()
 })
 
 // "Close" button closes the dialog
