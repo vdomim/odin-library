@@ -69,7 +69,6 @@ main{
     align-items: center;
     background-color: #737373;
     opacity: 0.6;
-    
     box-shadow: #262626 2px 2px 6px 2px;
 }
 
@@ -86,9 +85,26 @@ main{
 }
 
 .card-actions button {
-    width: 100px;
-    height: 30px;
+    width: 80px;
+    height: 80px;
     border-radius: 10px;
+    outline: none;
+    border: 0px;
+}
+
+.card-actions button:hover {
+    background-color: #404040;
+    fill: #d4d4d4;
+}
+
+.remove-book, .readed-check{
+    width: 80px;
+    padding: .5rem;
+    fill: #404040;
+}
+
+.remove-book:hover, .readed-check:hover{
+    fill: #d4d4d4;
 }
 
 .addBook {
@@ -98,10 +114,25 @@ main{
     width: 80px;
     height: 80px;
     background-color: #d4d4d4;
+    outline: none;
+    border: inset 1px #404040;
 }
 
 .addBook svg {
     fill: #404040;
+    padding: 1rem;
+    width: 80px;
+}
+
+.addBook:hover {
+    cursor: pointer;
+    fill: #d4d4d4;
+    background-color: #404040;
+    border: inset 1px #d4d4d4;
+}
+
+.addBook svg:hover {
+    fill: #d4d4d4;
 }
 
 dialog {
