@@ -97,14 +97,18 @@ main{
     fill: #d4d4d4;
 }
 
-.remove-book, .readed-check{
+.remove-book, .readed img{
     width: 80px;
     padding: .5rem;
     fill: #404040;
+    filter: invert(25%) sepia(0%) saturate(613%) hue-rotate(206deg) brightness(90%) contrast(89%);
 }
 
-.remove-book:hover, .readed-check:hover{
-    fill: #d4d4d4;
+.hidden {
+    display: none;
+}
+.remove-book:hover, .readed img:hover{
+    filter: invert(91%) sepia(1%) saturate(6%) hue-rotate(314deg) brightness(92%) contrast(98%);
 }
 
 .addBook {
