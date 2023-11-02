@@ -4,16 +4,12 @@ const submitBtn = document.querySelector('.submit')
 const closeButton = document.querySelector('dialog button')
 const cardContainter = document.querySelector('.card-container')
 
-console.log(submitBtn)
-console.log(addBtn)
-
 const myLibrary = []
 
 function Book(title, author, pages, readed) {
     this.title = title
     this.author = author
     this.pages = pages
-    console.log(readed)
 
     this.readed = readed
     this.info = function () {
@@ -27,8 +23,8 @@ function addBookToLibrary(book) {
     myLibrary.push(book)
 }
 
-const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295)
-const book2 = new Book('The Hobbit 2', 'J.R.R. Tolkien', 300)
+const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false)
+const book2 = new Book('The Hobbit 2', 'J.R.R. Tolkien', 300, false)
 addBookToLibrary(book1)
 addBookToLibrary(book2)
 
@@ -96,13 +92,11 @@ closeButton.addEventListener('click', () => {
 
 submitBtn.addEventListener('click', (event) => {
     event.preventDefault()
-    console.log('hika')
 
     let title = document.querySelector('#title').value
     let author = document.querySelector('#author').value
     let pages = document.querySelector('#numPages').value
     let readed = Boolean(document.querySelector('#readed').checked)
-    console.log(readed)
 
     const newBook = new Book(title, author, pages, readed)
     addBookToLibrary(newBook)
