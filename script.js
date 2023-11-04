@@ -3,12 +3,13 @@ const addBtn = document.querySelector('.addBook')
 const submitBtn = document.querySelector('.submit')
 const closeButton = document.querySelector('dialog button')
 const cardContainter = document.querySelector('.card-container')
-const removeBtn = document.querySelector('.remove-book')
 const readedBtn = document.querySelector('.readed img')
 
-const myLibrary = []
+let myLibrary = []
+let bookId = 0
 
 function Book(title, author, pages, readed) {
+    this.id = bookId++
     this.title = title
     this.author = author
     this.pages = pages
@@ -23,6 +24,7 @@ function Book(title, author, pages, readed) {
 
 function addBookToLibrary(book) {
     myLibrary.push(book)
+    const removeBtns = document.querySelectorAll('.remove-book')
 }
 
 const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false)
@@ -45,6 +47,7 @@ function paintBooks() {
 function createNewCard(book) {
     const newCard = document.createElement('div')
     newCard.className = 'card'
+    newCard.dataset.id = book.id;
 
     const newCardContent = createNewCardContent(book)
     const newCardActions = createNewCardActions(book)
@@ -60,19 +63,25 @@ function createNewCardActions(book) {
     const newImgEliminar = document.createElement('img')
     newImgEliminar.className = "remove-book"
     newImgEliminar.src = './imgs/book-remove-outline.svg'
+    newButtonEliminar.addEventListener('click', () => {
+        deleteBook(book.id)
+        const cards = document.querySelectorAll(".card")
+        cards.forEach(node => {
+            if(node.dataset.id === String(book.id)){
+                cardToRemove = node
+            };
+        })
+
+        cardContainter.removeChild(cardToRemove)
+    })
     newButtonEliminar.appendChild(newImgEliminar)
 
     const newButtonReaded = document.createElement('button')
     newButtonReaded.className = 'readed'
     const newImgReaded = document.createElement('img')
 
-    if(book.readed) {
-        newImgReaded.className = 'readed'
-        newImgReaded.src = './imgs/bookmark-check-outline.svg'
-    } else {
-        newImgReaded.className = 'not-readed'
-        newImgReaded.src = './imgs/bookmark-outline.svg'
-    }
+    checkReadedImage(book.readed, newImgReaded)
+
     newImgReaded.addEventListener('click', (event) => {
         toggleReaded(event)
     })
@@ -80,6 +89,20 @@ function createNewCardActions(book) {
 
     newCardActions.append(newButtonEliminar, newButtonReaded)
     return newCardActions
+}
+
+function deleteBook(id) {
+    myLibrary = myLibrary.filter(book => book.id !== id)
+}
+
+function checkReadedImage(readed, newImgReaded) {
+    if(readed) {
+        newImgReaded.className = 'readed'
+        newImgReaded.src = './imgs/bookmark-check-outline.svg'
+    } else {
+        newImgReaded.className = 'not-readed'
+        newImgReaded.src = './imgs/bookmark-outline.svg'
+    }
 }
 
 function createNewCardContent(book) {
@@ -99,15 +122,6 @@ function createNewElement(input) {
     return element
 }
 
-addBtn.addEventListener('click', () => {
-    dialog.showModal()
-})
-
-// "Close" button closes the dialog
-closeButton.addEventListener('click', () => {
-    dialog.close()
-})
-
 function toggleReaded (event) {
     if(event.target.className==='readed'){
         event.target.className = 'not-readed'
@@ -118,6 +132,14 @@ function toggleReaded (event) {
     }
 }
 
+addBtn.addEventListener('click', () => {
+    dialog.showModal()
+})
+
+// "Close" button closes the dialog
+closeButton.addEventListener('click', () => {
+    dialog.close()
+})  
 
 submitBtn.addEventListener('click', (event) => {
     event.preventDefault()
