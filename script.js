@@ -8,6 +8,12 @@ const readedBtn = document.querySelector('.readed img')
 let myLibrary = []
 let bookId = 0
 
+const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false)
+const book2 = new Book('The Hobbit 2', 'J.R.R. Tolkien', 300, true)
+addBookToLibrary(book1)
+addBookToLibrary(book2)
+paintBooks()
+
 function Book(title, author, pages, readed) {
     this.id = bookId++
     this.title = title
@@ -24,24 +30,16 @@ function Book(title, author, pages, readed) {
 
 function addBookToLibrary(book) {
     myLibrary.push(book)
-    const removeBtns = document.querySelectorAll('.remove-book')
-}
-
-const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false)
-const book2 = new Book('The Hobbit 2', 'J.R.R. Tolkien', 300, true)
-addBookToLibrary(book1)
-addBookToLibrary(book2)
-
-paintBooks()
-
-function paintNewBook(book) {
-    cardContainter.appendChild(createNewCard(book))
 }
 
 function paintBooks() {
     myLibrary.forEach((book) => {
         paintNewBook(book)
     })
+}
+
+function paintNewBook(book) {
+    cardContainter.appendChild(createNewCard(book))
 }
 
 function createNewCard(book) {
@@ -79,9 +77,7 @@ function createNewCardActions(book) {
     const newButtonReaded = document.createElement('button')
     newButtonReaded.className = 'readed'
     const newImgReaded = document.createElement('img')
-
     checkReadedImage(book.readed, newImgReaded)
-
     newImgReaded.addEventListener('click', (event) => {
         toggleReaded(event)
     })
@@ -123,12 +119,23 @@ function createNewElement(input) {
 }
 
 function toggleReaded (event) {
+    const card = event.target.parentNode.parentNode.parentNode
+    let id = card.dataset.id
+    myLibrary.forEach(book => {
+        if(Number(book.id) === Number(id)){
+            book.readed=!book.readed;
+        }
+    })
+    
     if(event.target.className==='readed'){
         event.target.className = 'not-readed'
         event.target.src = './imgs/bookmark-outline.svg'
+        card.firstChild.children[3].textContent = 'sin leer'
+        
     }else{
         event.target.className = 'readed'
         event.target.src = './imgs/bookmark-check-outline.svg'
+        card.firstChild.children[3].textContent = 'leido'
     }
 }
 
