@@ -26,11 +26,16 @@
             </svg>
         </button>
     </main>
+    <footer>
+        <h3>The odin project</h3>
+    </footer>
     <dialog>
-        <button value="cancel" formmethod="dialog" autofocus>Cancel</button>
+        <button class="close-button" value="cancel" formmethod="dialog">
+            <img class="close-button-img"  src="./imgs/close-circle-outline.svg" alt="Close adding book window"/>
+        </button>
         <form action="">
             <label>Titulo
-                <input type="text" name="title" id="title">
+                <input type="text" name="title" id="title" autofocus>
             </label>
             <label>Autor
                 <input type="text" name="author" id="author">

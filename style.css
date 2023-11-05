@@ -79,6 +79,12 @@ main{
     text-align: center;
 }
 
+.card-content p{
+    color: #111111;
+    font-size: 1.3rem;
+    font-weight: 1000;
+}
+
 .card-actions {
     display: flex;
     gap: 2rem;
@@ -95,6 +101,7 @@ main{
 .card-actions button:hover {
     background-color: #404040;
     fill: #d4d4d4;
+    cursor: pointer;
 }
 
 .remove-book, .readed img{
@@ -140,11 +147,11 @@ main{
 }
 
 dialog {
-    position: absolute;
     top: 25%;
     width: 400px;
     left: calc(50% - 200px);
     border-radius: 12px;
+    background-color: #d4d4d4;
 }
 
 dialog form {
@@ -155,4 +162,47 @@ dialog form {
     height: 50%;
     gap: 3rem;
     padding: 3rem;
+}
+
+.close-button {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: #737373;
+    color: #d4d4d4;
+    border: none;
+    margin: 1rem;
+}
+
+.close-button-img {
+    filter: invert(91%) sepia(1%) saturate(6%) hue-rotate(314deg) brightness(92%) contrast(98%);
+}
+
+.close-button-img:hover {
+    cursor: pointer;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #d4d4d4;
+}
+
+label {
+    display: flex;
+    gap: 2rem;
+    font-size: large;
+    font-weight: 600;
+}
+
+.submit {
+    padding: 8px 12px ;
+    border: 1px solid rgb(138, 137, 137);
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.submit:hover {
+    cursor: pointer;
 }

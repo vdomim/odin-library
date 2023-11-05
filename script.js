@@ -104,18 +104,17 @@ function checkReadedImage(readed, newImgReaded) {
 function createNewCardContent(book) {
     const newCardContent = document.createElement('div')
     newCardContent.className = 'card-content'
-    const title = createNewElement(book.title)
-    const author = createNewElement(book.author)
-    const pages = createNewElement(book.pages + ' pages')
-    const readed = createNewElement(book.readed ? 'leido' : 'sin leer')
-    newCardContent.append(title, author, pages, readed)
+    createNewElement(book.title, book.author, book.pages + ' pages', book.readed ? 'Leido' : 'Sin leer')
+    
+    function createNewElement(...inputs) {
+        inputs.forEach(input => {
+            const element = document.createElement('p')
+            element.innerText = input
+            newCardContent.append(element)
+        })
+    }
+
     return newCardContent
-}
-function createNewElement(input) {
-    const element = document.createElement('p')
-    const elementText = document.createTextNode(input)
-    element.appendChild(elementText)
-    return element
 }
 
 function toggleReaded (event) {
@@ -130,12 +129,11 @@ function toggleReaded (event) {
     if(event.target.className==='readed'){
         event.target.className = 'not-readed'
         event.target.src = './imgs/bookmark-outline.svg'
-        card.firstChild.children[3].textContent = 'sin leer'
-        
+        card.firstChild.children[3].textContent = 'Sin leer'
     }else{
         event.target.className = 'readed'
         event.target.src = './imgs/bookmark-check-outline.svg'
-        card.firstChild.children[3].textContent = 'leido'
+        card.firstChild.children[3].textContent = 'Leido'
     }
 }
 
@@ -151,12 +149,17 @@ closeButton.addEventListener('click', () => {
 submitBtn.addEventListener('click', (event) => {
     event.preventDefault()
 
-    let title = document.querySelector('#title').value
-    let author = document.querySelector('#author').value
-    let pages = document.querySelector('#numPages').value
-    let readed = Boolean(document.querySelector('#readed').checked)
-
-    const newBook = new Book(title, author, pages, readed)
+    let title = document.querySelector('#title')
+    let author = document.querySelector('#author')
+    let pages = document.querySelector('#numPages')
+    let readed = document.querySelector('#readed')
+    
+    const newBook = new Book(title.value, author.value, pages.value, readed.checked)
     addBookToLibrary(newBook)
     paintNewBook(newBook)
+    title.value = ''
+    author.value = ''
+    pages.value = ''
+    readed.checked = false
+    dialog.close()
 })
