@@ -8,39 +8,28 @@ const readedBtn = document.querySelector('.readed img')
 let myLibrary = []
 let bookId = 0
 
-const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false)
-const book2 = new Book('The Hobbit 2', 'J.R.R. Tolkien', 300, true)
-addBookToLibrary(book1)
-addBookToLibrary(book2)
-paintBooks()
 
-function Book(title, author, pages, readed) {
-    this.id = bookId++
-    this.title = title
-    this.author = author
-    this.pages = pages
-
-    this.readed = readed
-    this.info = function () {
+class Book{
+    constructor(title, author, pages, readed){
+        this.id = bookId++
+        this.title = title
+        this.author = author
+        this.pages = pages
+        this.readed = readed
+    }
+    
+    info () {
         return `${this.title} by ${this.author}, ${this.pages} pages, ${
             readed ? 'readed' : 'not readed yet'
         }`
     }
 }
 
-function addBookToLibrary(book) {
-    myLibrary.push(book)
-}
-
-function paintBooks() {
-    myLibrary.forEach((book) => {
-        paintNewBook(book)
-    })
-}
-
-function paintNewBook(book) {
-    cardContainter.appendChild(createNewCard(book))
-}
+const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false)
+const book2 = new Book('The Hobbit 2', 'J.R.R. Tolkien', 300, true)
+addBookToLibrary(book1)
+addBookToLibrary(book2)
+paintBooks()
 
 function createNewCard(book) {
     const newCard = document.createElement('div')
@@ -163,3 +152,17 @@ submitBtn.addEventListener('click', (event) => {
     readed.checked = false
     dialog.close()
 })
+
+function addBookToLibrary(book) {
+    myLibrary.push(book)
+}
+
+function paintBooks() {
+    myLibrary.forEach((book) => {
+        paintNewBook(book)
+    })
+}
+
+function paintNewBook(book) {
+    cardContainter.appendChild(createNewCard(book))
+}
